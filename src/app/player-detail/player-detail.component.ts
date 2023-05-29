@@ -18,10 +18,19 @@ export class PlayerDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('ng onInit');
     this.playerDetailQuery.select('height').subscribe((result) => {
       console.log(result);
       this.count = result ?? 0;
     });
+  }
+
+  ngAfterViewInit() {
+    console.log('ngAfterViewInit');
+  }
+
+  ngOnDestroy() {
+    console.log('ngOndestroy');
   }
 
   onClick(): void {
