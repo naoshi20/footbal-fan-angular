@@ -1,16 +1,27 @@
 import { Injectable } from '@angular/core';
-import { PlayerStore } from '../core/state/player/player.store';
+import { PlayerDetailStore } from '../stores/player-detail.store';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class PlayerDetailService {
-  constructor(private playerStore: PlayerStore, private http: HttpClient) {}
+  constructor(
+    private playerDetailStore: PlayerDetailStore,
+    private http: HttpClient
+  ) {}
 
-  async updateName(newName: string) {
-    this.playerStore.setLoading(true);
+  updateName(newName: string) {
+    this.playerDetailStore.setLoading(true);
     const result = 'success'; // await this.http.get('./../../server.js');
-    this.playerStore.update({ name: newName });
-    this.playerStore.setLoading(false);
+    this.playerDetailStore.update({ name: newName });
+    this.playerDetailStore.setLoading(false);
+    return result;
+  }
+
+  updateHeight(newHeight: number) {
+    this.playerDetailStore.setLoading(true);
+    const result = 'success'; // await this.http.get('./../../server.js');
+    this.playerDetailStore.update({ height: newHeight });
+    this.playerDetailStore.setLoading(false);
     return result;
   }
 }
