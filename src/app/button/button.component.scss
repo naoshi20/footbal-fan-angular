@@ -1,0 +1,144 @@
+@import 'src/assets/styles/reset.scss';
+
+@mixin primary-button-style($bgColor) {
+  // 背景が白の時
+  @if $bgColor == var(--color-secondary) {
+    // var(--color-secondary)
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    border-color: var(--color-primary);
+
+    &:disabled {
+      background-color: rgba(0, 0, 0, 0.1);
+      color: rgba(255, 255, 255, 0.3);
+      border-color: transparent;
+      cursor: not-allowed;
+    }
+  }
+
+  // 背景が黒の時
+  @if $bgColor == var(--color-primary) {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border-color: var(--color-secondary);
+
+    &:disabled {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: rgba(0, 0, 0, 0.1);
+      border-color: transparent;
+      cursor: not-allowed;
+    }
+  }
+}
+
+@mixin secondary-button-style($bgColor) {
+  @if $bgColor == var(--color-secondary) {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+
+    &:disabled {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.1);
+      cursor: not-allowed;
+    }
+  }
+  @if $bgColor == var(--color-primary) {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
+
+    &:disabled {
+      background-color: rgba(0, 0, 0, 0.1);
+      color: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.3);
+      cursor: not-allowed;
+    }
+  }
+}
+
+@mixin ghost-button-style($bgColor) {
+  @if $bgColor == var(--color-secondary) {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border-color: var(--color-secondary);
+
+    &:disabled {
+      background-color: rgba(255, 255, 255, 0.3);
+      color: rgba(0, 0, 0, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      cursor: not-allowed;
+    }
+  }
+  @if $bgColor == var(--color-primary) {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    border-color: var(--color-primary);
+
+    &:disabled {
+      background-color: rgba(0, 0, 0, 0.1);
+      color: rgba(255, 255, 255, 0.3);
+      border-color: rgba(0, 0, 0, 0.1);
+      cursor: not-allowed;
+    }
+  }
+}
+
+@mixin button-style($type, $bgColor) {
+  @extend %reset-Button;
+
+  display: inline-block;
+  width: 220px;
+  margin: 20px;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  border: solid;
+
+  @if $type == primary {
+    @include primary-button-style($bgColor);
+  }
+  @if $type == secondary {
+    @include secondary-button-style($bgColor);
+  }
+  @if $type == ghost {
+    @include ghost-button-style($bgColor);
+  }
+}
+
+.PlayerDetail_PrimaryButtonWithWhiteBg {
+  @include button-style(primary, var(--color-secondary));
+}
+
+.PlayerDetail_SecondaryButtonWithWhiteBg {
+  @include button-style(secondary, var(--color-secondary));
+}
+
+.PlayerDetail_GhostButtonWithWhiteBg {
+  @include button-style(ghost, var(--color-secondary));
+}
+
+.PlayerDetail_PrimaryButtonWithBlackBg {
+  @include button-style(primary, var(--color-primary));
+}
+
+.PlayerDetail_SecondaryButtonWithBlackBg {
+  @include button-style(secondary, var(--color-primary));
+}
+
+.PlayerDetail_GhostButtonWithBlackBg {
+  @include button-style(ghost, var(--color-primary));
+}
+
+.row {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
