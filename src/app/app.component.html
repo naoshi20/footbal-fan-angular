@@ -1,9 +1,9 @@
 <h1>{{title}}</h1>
 <header style="background-color: white;">
   <h2>ヘッダー</h2>
-  <ng-container *ngFor="let pageLink of pageLinks | keyvalue; let even=even">
-    <app-button [title]="pageLink.value" [link]="pageLink.key" [buttonType]="even ? 'primary' : 'secondary'"
-      [bgColor]="'white'" [isDisabled]="pageLink.key == currentPath">
+  <ng-container *ngFor="let pageLink of pageLinks | keyvalue; let i = index">
+    <app-button [title]="pageLink.value" [link]="pageLink.key" [buttonType]="styleButton(i)" [bgColor]="'white'"
+      [isDisabled]="pageLink.key == currentPath">
     </app-button>
   </ng-container>
 </header>
@@ -15,9 +15,9 @@
 
 <footer style="background-color: black;">
   <h2 style="color: white">フッター</h2>
-  <ng-container *ngFor="let pageLink of pageLinks | keyvalue; let even=even">
-    <app-button [title]="pageLink.value" [link]="pageLink.key" [buttonType]="even ? 'primary' : 'secondary'"
-      [bgColor]="'black'" [isDisabled]="pageLink.key == currentPath">
+  <ng-container *ngFor="let pageLink of pageLinks | keyvalue; let i = index">
+    <app-button [title]="pageLink.value" [link]="pageLink.key" [buttonType]="styleButton(i)" [bgColor]="'black'"
+      [isDisabled]="pageLink.key == currentPath">
     </app-button>
   </ng-container>
 </footer>

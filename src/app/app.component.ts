@@ -26,4 +26,19 @@ export class AppComponent {
       this.currentPath = result ?? ''
     })
   }
+
+  public styleButton(index: number): string {
+    const remainder = index % 3
+    let buttonType
+    if (remainder === 0) {
+      buttonType = 'primary'
+    } else if (remainder === 1) {
+      buttonType = 'secondary'
+    } else if (remainder === 2) {
+      buttonType = 'ghost'
+    } else {
+      throw new Error('')
+    }
+    return buttonType
+  }
 }
