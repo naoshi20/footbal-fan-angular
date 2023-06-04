@@ -109,27 +109,27 @@
   }
 }
 
-.PlayerDetail_PrimaryButtonWithWhiteBg {
+.Button_PrimaryButtonWithWhiteBg {
   @include button-style(primary, var(--color-secondary));
 }
 
-.PlayerDetail_SecondaryButtonWithWhiteBg {
+.Button_SecondaryButtonWithWhiteBg {
   @include button-style(secondary, var(--color-secondary));
 }
 
-.PlayerDetail_GhostButtonWithWhiteBg {
+.Button_GhostButtonWithWhiteBg {
   @include button-style(ghost, var(--color-secondary));
 }
 
-.PlayerDetail_PrimaryButtonWithBlackBg {
+.Button_PrimaryButtonWithBlackBg {
   @include button-style(primary, var(--color-primary));
 }
 
-.PlayerDetail_SecondaryButtonWithBlackBg {
+.Button_SecondaryButtonWithBlackBg {
   @include button-style(secondary, var(--color-primary));
 }
 
-.PlayerDetail_GhostButtonWithBlackBg {
+.Button_GhostButtonWithBlackBg {
   @include button-style(ghost, var(--color-primary));
 }
 

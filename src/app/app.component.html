@@ -1,10 +1,23 @@
 <h1>{{title}}</h1>
-<header>
-  <a [routerLink]="['/player']">
-    プレイヤー
-  </a>
-  <a [routerLink]="['/button']">
-    ボタン
-  </a>
+<header style="background-color: white;">
+  <h2>ヘッダー</h2>
+  <ng-container *ngFor="let pageLink of pageLinks | keyvalue; let even=even">
+    <app-button [title]="pageLink.value" [link]="pageLink.key" [buttonType]="even ? 'primary' : 'secondary'"
+      [bgColor]="'white'">
+    </app-button>
+  </ng-container>
 </header>
-<router-outlet></router-outlet>
+
+<body>
+  <h2>ボディ</h2>
+  <router-outlet></router-outlet>
+</body>
+
+<footer style="background-color: black;">
+  <h2 style="color: white">フッター</h2>
+  <ng-container *ngFor="let pageLink of pageLinks | keyvalue; let even=even">
+    <app-button [title]="pageLink.value" [link]="pageLink.key" [buttonType]="even ? 'primary' : 'secondary'"
+      [bgColor]="'black'">
+    </app-button>
+  </ng-container>
+</footer>
