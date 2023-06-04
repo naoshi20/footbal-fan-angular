@@ -31,3 +31,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Generate component
 
 Run `ng generate component [name]` to Creates a new, generic component definition in the given project.
+
+## Run mock server
+
+Run `node server/index.js`
+
+## Test mock server
+
+Access to http://localhost:3000/player
