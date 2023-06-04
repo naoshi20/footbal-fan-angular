@@ -8,10 +8,11 @@ import { HttpClientModule } from '@angular/common/http'
 import { PlayerDetailComponent } from './player-detail/player-detail.component'
 import { PlayerDetailService } from './service/player-detail.service'
 
-import { ButtonComponent } from './button/button.component'
+import { ButtonComponent } from './button/button.component';
+import { PlayerListComponent } from './player-list/player-list.component'
 
 @NgModule({
-  declarations: [AppComponent, PlayerDetailComponent, ButtonComponent],
+  declarations: [AppComponent, PlayerDetailComponent, ButtonComponent, PlayerListComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [PlayerDetailService],
   bootstrap: [AppComponent]

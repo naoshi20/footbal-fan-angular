@@ -12,7 +12,8 @@ export class AppComponent {
 
   pageLinks: Map<string, string> = new Map([
     ['/', 'ホーム'],
-    ['/player', 'プレイヤー'],
+    ['/players', '選手一覧'],
+    ['/player', '選手'],
     ['/button', 'ボタン']
   ])
 
