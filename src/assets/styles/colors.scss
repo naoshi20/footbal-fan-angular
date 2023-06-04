@@ -1,0 +1,19 @@
+:root {
+  // define custom properties
+  // $***だとインポートする必要があるため、カスタムプロパティで変数を定義する
+  // example
+  // #firstParagraph {
+  //   background-color: var(--color-primary-black);
+  //   color: var(--color-secondary);
+  // }
+  --color-primary: black;
+  //--color-primary-light: rgba(0, 0, 0, 0.1);
+  --color-secondary: white;
+  --color-secondary-light: rgba(255, 255, 255, 0.3);
+  // --color-accent: #eefff0;
+  // --color-notice: #eefff0;
+  // --color-grey-light-1: rgba($BLACK, 0.88);
+  // --color-grey-light-2: #aaa;
+  // --color-grey-dark-1: #54483a;
+  // --color-grey-dark-2: #6d5d4b;
+}
