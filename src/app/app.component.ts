@@ -1,4 +1,6 @@
 import { Component } from '@angular/core'
+import { PathService } from './service/path.service'
+import { PathQuery } from './queries/path.query'
 
 @Component({
   selector: 'app-root',
@@ -9,12 +11,19 @@ export class AppComponent {
   title = 'football-fan'
 
   pageLinks: Map<string, string> = new Map([
-    ['', 'ホーム'],
-    ['player', 'プレイヤー'],
-    ['button', 'ボタン']
+    ['/', 'ホーム'],
+    ['/player', 'プレイヤー'],
+    ['/button', 'ボタン']
   ])
 
+  currentPath = ''
+
+  constructor(private pathService: PathService, private pathQuery: PathQuery) {}
+
   ngOnInit(): void {
-    console.log(this.pageLinks)
+    this.pathQuery.select('currentPath').subscribe(result => {
+      console.log('currentPath', result)
+      this.currentPath = result ?? ''
+    })
   }
 }

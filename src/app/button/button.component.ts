@@ -11,18 +11,21 @@ export class ButtonComponent implements OnInit {
   @Input() public title?: string = 'デフォルト'
   @Input() public buttonType?: string = 'primary'
   @Input() public bgColor?: string = 'white'
+  @Input() public isDisabled: boolean = false
 
   public classes: string = 'Button_PrimaryButtonWithWhiteBg'
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    console.log('***************')
     console.log('ButtonComponent')
+    console.log(this.isDisabled)
     this.addClass()
+    console.log('***************')
   }
 
   public onClick(): void {
-    console.log(this.link)
     this.router.navigateByUrl(this.link ?? '')
   }
 
