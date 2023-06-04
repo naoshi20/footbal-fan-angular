@@ -1,0 +1,9 @@
+@function toRem($pxVal) {
+  $remVal: ($pxVal / 16) + rem;
+  @return $remVal;
+}
+
+// margin-top: toRem(48);
+// margin-top: toRem(24);
+// margin-top: toRem(16);
+// margin-top: toRem(12);
