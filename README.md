@@ -39,3 +39,7 @@ Run `node server/index.js`
 ## Test mock server
 
 Access to http://localhost:3000/player
+
+## Deploy on Github Pages
+
+https://www.makeuseof.com/angular-app-github-deploy-using-angular-cli/
