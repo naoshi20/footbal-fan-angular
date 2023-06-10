@@ -4,8 +4,9 @@ import { PlayerDetailComponent } from './player-detail/player-detail.component'
 import { PlayerListComponent } from './player-list/player-list.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: '/players', pathMatch: 'full' },
-  { path: 'players', component: PlayerListComponent },
+  // { path: '', redirectTo: '/players', pathMatch: 'full' },
+  // { path: 'players', component: PlayerListComponent },
+  { path: '', component: PlayerListComponent },
   { path: 'player', component: PlayerDetailComponent }
 ]
 
