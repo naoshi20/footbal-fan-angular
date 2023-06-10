@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 
 @Component({
-  selector: 'app-button',
-  templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  selector: 'app-header-button',
+  templateUrl: './header-button.component.html',
+  styleUrls: ['./header-button.component.scss']
 })
-export class ButtonComponent implements OnInit {
+export class HeaderButtonComponent implements OnInit {
   @Input() public link?: string = ''
   @Input() public title?: string = 'デフォルト'
   @Input() public buttonType?: string = 'primary'

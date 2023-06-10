@@ -13,17 +13,17 @@
   @include button-style(ghost, var(--color-secondary));
 }
 
-.Button_PrimaryButtonWithBlackBg {
-  @include button-style(primary, var(--color-primary));
-}
+// .Button_PrimaryButtonWithBlackBg {
+//   @include button-style(primary, var(--color-primary));
+// }
 
-.Button_SecondaryButtonWithBlackBg {
-  @include button-style(secondary, var(--color-primary));
-}
+// .Button_SecondaryButtonWithBlackBg {
+//   @include button-style(secondary, var(--color-primary));
+// }
 
-.Button_GhostButtonWithBlackBg {
-  @include button-style(ghost, var(--color-primary));
-}
+// .Button_GhostButtonWithBlackBg {
+//   @include button-style(ghost, var(--color-primary));
+// }
 
 .row {
   display: flex;

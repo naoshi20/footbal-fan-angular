@@ -2,9 +2,9 @@
 <header style="background-color: white;">
   <h2>ヘッダー</h2>
   <ng-container *ngFor="let pageLink of pageLinks | keyvalue; let i = index">
-    <app-button [title]="pageLink.value" [link]="pageLink.key" [buttonType]="styleButton(i)" [bgColor]="'white'"
+    <app-header-button [title]="pageLink.value" [link]="pageLink.key" [buttonType]="styleButton(i)" [bgColor]="'white'"
       [isDisabled]="pageLink.key == currentPath">
-    </app-button>
+    </app-header-button>
   </ng-container>
 </header>
 
@@ -12,12 +12,3 @@
   <h2>ボディ</h2>
   <router-outlet></router-outlet>
 </body>
-
-<footer style="background-color: black;">
-  <h2 style="color: white">フッター</h2>
-  <ng-container *ngFor="let pageLink of pageLinks | keyvalue; let i = index">
-    <app-button [title]="pageLink.value" [link]="pageLink.key" [buttonType]="styleButton(i)" [bgColor]="'black'"
-      [isDisabled]="pageLink.key == currentPath">
-    </app-button>
-  </ng-container>
-</footer>
