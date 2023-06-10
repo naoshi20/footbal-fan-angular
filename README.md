@@ -43,3 +43,8 @@ Access to http://localhost:3000/player
 ## Deploy on Github Pages
 
 https://www.makeuseof.com/angular-app-github-deploy-using-angular-cli/
+
+1. edit on master branch
+2. checkout to gh-pages
+3. git merge master
+4. ng deploy --base-href=https://naoshi20.github.io/football-fan-angular/
