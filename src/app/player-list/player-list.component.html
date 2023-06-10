@@ -1,10 +1,18 @@
-<ng-container *ngFor="let player of players; let playerId = index">
-  <a [routerLink]="[ player.id ]">
-    <div class="card">
-      <!-- <img class="card-img-top" src="{{ player.face_img }}" alt="Card image cap"> -->
-      <div class="card-body">
-        <h5 class="card-text">{{ player.name }}</h5>
-      </div>
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <ng-container *ngFor="let player of players; let playerId = index">
+        <div class="col-md-3 col-sm-4 col-6">
+          <a [routerLink]="[ player.id ]">
+            <div class="card">
+              <img class="card-img-top" src="{{ player.img }}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-text">{{ player.name }}</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+      </ng-container>
     </div>
-  </a>
-</ng-container>
+  </div>
+</div>
