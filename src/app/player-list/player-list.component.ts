@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { PlayerService } from '../service/players.service'
+import { SupabaseService } from '../supabase.service'
 
 @Component({
   selector: 'app-player-list',
@@ -8,12 +8,37 @@ import { PlayerService } from '../service/players.service'
 })
 export class PlayerListComponent implements OnInit {
   players: any = []
-  constructor(private playerService: PlayerService) {}
+  loading = false
 
-  ngOnInit(): void {
-    this.playerService.getPlayers().subscribe(data => {
-      console.log(data)
-      this.players = data
-    })
+  constructor(private readonly supabaseService: SupabaseService) {} //private playerService: PlayerService
+
+  async ngOnInit(): Promise<void> {
+    await this.retrievePlayer()
+  }
+
+  async retrievePlayer() {
+    try {
+      this.loading = true
+      let {
+        data: players,
+        error,
+        status
+      } = await this.supabaseService.retrievePlayers()
+      this.loading = false
+
+      if (error && status !== 406) {
+        throw error
+      }
+
+      if (players) {
+        this.players = players
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message)
+      }
+    } finally {
+      this.loading = false
+    }
   }
 }

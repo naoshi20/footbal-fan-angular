@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <ng-container *ngFor="let player of players; let playerId = index">
-        <ng-container *ngIf="player.mai_team === 'TRUE'">
+        <ng-container *ngIf="player.mai_team">
           <div class="col-md-3 col-sm-4 col-6">
             <a [routerLink]="[ player.id ]">
               <div class="card">
@@ -18,4 +18,3 @@
       </ng-container>
     </div>
   </div>
-</div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { PathService } from './service/path.service'
 import { PathQuery } from './queries/path.query'
+import { SupabaseService } from './supabase.service'
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,8 @@ import { PathQuery } from './queries/path.query'
 })
 export class AppComponent {
   title = 'football-fan'
+
+  session = this.supabase.session
 
   pageLinks: Map<string, string> = new Map([
     ['/', 'ホーム'],
@@ -19,9 +22,15 @@ export class AppComponent {
 
   currentPath = ''
 
-  constructor(private pathService: PathService, private pathQuery: PathQuery) {}
+  constructor(
+    private pathService: PathService,
+    private pathQuery: PathQuery,
+    private readonly supabase: SupabaseService
+  ) {}
 
   ngOnInit(): void {
+    this.supabase.authChanges((_, session) => (this.session = session))
+
     this.pathQuery.select('currentPath').subscribe(result => {
       console.log('currentPath', result)
       this.currentPath = result ?? ''
