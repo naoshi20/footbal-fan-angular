@@ -32,7 +32,6 @@ export class AppComponent {
     this.supabase.authChanges((_, session) => (this.session = session))
 
     this.pathQuery.select('currentPath').subscribe(result => {
-      console.log('currentPath', result)
       this.currentPath = result ?? ''
     })
   }

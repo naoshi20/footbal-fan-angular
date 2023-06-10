@@ -18,11 +18,7 @@ export class HeaderButtonComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    console.log('***************')
-    console.log('ButtonComponent')
-    console.log(this.isDisabled)
     this.addClass()
-    console.log('***************')
   }
 
   public onClick(): void {
@@ -30,7 +26,6 @@ export class HeaderButtonComponent implements OnInit {
   }
 
   private addClass(): void {
-    console.log(this.buttonType)
     if (!this.buttonType || !this.bgColor) {
       return
     }
