@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { BootstrapOptions, Injectable } from '@angular/core'
 import {
   AuthChangeEvent,
   AuthSession,
@@ -52,9 +52,9 @@ export class SupabaseService {
   }
 
   // from以上to未満のデータを取得
-  async retrieveSpecificPlayers(from: number = 1, to: number = 10) {
+  async retrieveSpecificPlayers(from: number, to: number) {
     const result = await this.supabase
-      .from('players')
+      .from('players5')
       .select('*')
       .gte('id', from)
       .lt('id', to)

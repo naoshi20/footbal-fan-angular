@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { SupabaseService } from '../supabase.service'
+import { Player, SupabaseService } from '../supabase.service'
 
 const PLAYERS_DISPLAYED_PAR_PAGE: number = 10
 
@@ -12,6 +12,7 @@ export class PlayerListComponent implements OnInit {
   players: any = []
   loading = false
   lastPlayerId: number = 0
+  displayMaiTeam: boolean = false
 
   constructor(private readonly supabaseService: SupabaseService) {} //private playerService: PlayerService
 
@@ -21,10 +22,11 @@ export class PlayerListComponent implements OnInit {
     console.log(this.lastPlayerId)
   }
 
-  public onChangePage() {
+  public async onChangePage() {
     const from = this.lastPlayerId + 1
     const to = from + PLAYERS_DISPLAYED_PAR_PAGE
-    this.retrieveSpecificPlayers(from, to)
+    await this.retrieveSpecificPlayers(from, to)
+    this.lastPlayerId = to
   }
 
   async retrieveSpecificPlayers(from: number, to: number): Promise<void> {
@@ -42,6 +44,7 @@ export class PlayerListComponent implements OnInit {
       }
 
       if (players) {
+        // players.mai_team
         this.players = [...this.players, ...players]
         return
       }
@@ -52,5 +55,15 @@ export class PlayerListComponent implements OnInit {
     } finally {
       this.loading = false
     }
+  }
+
+  trackByFn(index: number, player: Player) {
+    return player.id
+  }
+
+  toggleMaiTeam() {
+    console.log(this.displayMaiTeam)
+    this.displayMaiTeam = this.displayMaiTeam ? false : true
+    console.log(this.displayMaiTeam)
   }
 }
