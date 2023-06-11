@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 css_rule.md
+/html_parser/source_html
+/html_parser/outputs
+/html_parser/node_modules
 
 # Compiled output
 /dist
