@@ -21,7 +21,7 @@ export class PlayerListComponent implements OnInit {
     console.log(this.lastPlayerId)
   }
 
-  onChangePage() {
+  public onChangePage() {
     const from = this.lastPlayerId + 1
     const to = from + PLAYERS_DISPLAYED_PAR_PAGE
     this.retrieveSpecificPlayers(from, to)
