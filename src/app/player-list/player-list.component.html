@@ -1,7 +1,33 @@
 <div class="wrapper">
   <div class="container">
     <div class="row">
-      <button (click)="toggleMaiTeam()">マイチームのみ表示</button>
+      <div class="teamSwitcher">
+        <label class="switch">
+          <input (click)="toggleMaiTeam()" type="checkbox">
+          <span class="slider round"></span>
+        </label>
+        <div><span>全チームを表示</span></div>
+      </div>
+      <!-- マイチームのみ表示の時 -->
+      <ng-container *ngIf="displayMaiTeam">
+        <ng-container *ngFor="let player of mayTeamPlayers; index as i; trackBy: trackByFn">
+          <!-- <ng-container *ngIf="player.mai_team"> -->
+          <div class="col-md-3 col-sm-4 col-6">
+            <a [routerLink]="[ player.id ]">
+              <div class="card">
+                <img class="card-img-top" src="{{ player.img }}" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">{{ player.belongings }}</p>
+                  <h5 class="card-text">{{ player.japanese_name }}</h5>
+                </div>
+              </div>
+            </a>
+          </div>
+          <!-- </ng-container> -->
+        </ng-container>
+      </ng-container>
+      <button *ngIf="displayMaiTeam" (click)="onChangePageMaiTeam()">次の10人</button>
+
       <!-- 全表示の時 -->
       <ng-container *ngIf="!displayMaiTeam">
         <ng-container *ngFor="let player of players; index as i; trackBy: trackByFn">
@@ -10,7 +36,6 @@
               <div class="card">
                 <img class="card-img-top" src="{{ player.img }}" alt="Card image cap">
                 <div class="card-body">
-                  <p class="card-text">{{ player.id }}</p>
                   <p class="card-text">{{ player.belongings }}</p>
                   <h5 class="card-text">{{ player.japanese_name }}</h5>
                 </div>
@@ -19,25 +44,7 @@
           </div>
         </ng-container>
       </ng-container>
-      <!-- マイチームのみ表示の時 -->
-      <ng-container *ngIf="displayMaiTeam">
-        <ng-container *ngFor="let player of players; index as i; trackBy: trackByFn">
-          <ng-container *ngIf="player.mai_team">
-            <div class="col-md-3 col-sm-4 col-6">
-              <a [routerLink]="[ player.id ]">
-                <div class="card">
-                  <img class="card-img-top" src="{{ player.img }}" alt="Card image cap">
-                  <div class="card-body">
-                    <p class="card-text">{{ player.id }}</p>
-                    <p class="card-text">{{ player.belongings }}</p>
-                    <h5 class="card-text">{{ player.japanese_name }}</h5>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </ng-container>
-        </ng-container>
-      </ng-container>
-      <button (click)="onChangePage()">次の10人</button>
+      <button *ngIf="!displayMaiTeam" (click)="onChangePage()">次の10人</button>
+
     </div>
   </div>

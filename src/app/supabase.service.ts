@@ -7,6 +7,7 @@ import {
   Session
 } from '@supabase/supabase-js'
 import { environment } from 'src/environments/environment'
+import { PLAYERS_DISPLAYED_PAR_PAGE } from './player-list/player-list.component'
 
 export interface Player {
   id?: number
@@ -60,5 +61,31 @@ export class SupabaseService {
       .lt('id', to)
     console.log(result)
     return result
+  }
+
+  // from以上to未満のデータを取得
+  async retrieveSpecificPlayersByTeamName(
+    team: string[],
+    from?: number,
+    to?: number
+  ) {
+    if (from && to) {
+      const result = await this.supabase
+        .from('players5')
+        .select('*')
+        .in('belongings', team)
+        .gte('id', from)
+        .limit(PLAYERS_DISPLAYED_PAR_PAGE)
+      console.log(result)
+      return result
+    } else {
+      const result = await this.supabase
+        .from('players5')
+        .select('*')
+        .in('belongings', team)
+        .limit(PLAYERS_DISPLAYED_PAR_PAGE)
+      console.log(result)
+      return result
+    }
   }
 }
