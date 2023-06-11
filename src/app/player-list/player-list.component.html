@@ -2,19 +2,20 @@
   <div class="container">
     <div class="row">
       <ng-container *ngFor="let player of players; let playerId = index">
-        <ng-container *ngIf="player.mai_team">
-          <div class="col-md-3 col-sm-4 col-6">
-            <a [routerLink]="[ player.id ]">
-              <div class="card">
-                <img class="card-img-top" src="{{ player.img }}" alt="Card image cap">
-                <div class="card-body">
-                  <p class="card-text">{{ player.belongings }}</p>
-                  <h5 class="card-text">{{ player.name }}</h5>
-                </div>
+        <!-- <ng-container *ngIf="player.mai_team"> -->
+        <div class="col-md-3 col-sm-4 col-6">
+          <a [routerLink]="[ player.id ]">
+            <div class="card">
+              <img class="card-img-top" src="{{ player.img }}" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text">{{ player.belongings }}</p>
+                <h5 class="card-text">{{ player.name }}</h5>
               </div>
-            </a>
-          </div>
-        </ng-container>
+            </div>
+          </a>
+        </div>
+        <!-- </ng-container> -->
       </ng-container>
+      <button (click)="onChangePage()">次の10人</button>
     </div>
   </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { SupabaseService } from '../supabase.service'
 
+const PLAYERS_DISPLAYED_PAR_PAGE: number = 10
+
 @Component({
   selector: 'app-player-list',
   templateUrl: './player-list.component.html',
@@ -9,21 +11,30 @@ import { SupabaseService } from '../supabase.service'
 export class PlayerListComponent implements OnInit {
   players: any = []
   loading = false
+  lastPlayerId: number = 0
 
   constructor(private readonly supabaseService: SupabaseService) {} //private playerService: PlayerService
 
   async ngOnInit(): Promise<void> {
-    await this.retrievePlayer()
+    await this.retrieveSpecificPlayers(0, 0 + PLAYERS_DISPLAYED_PAR_PAGE)
+    this.lastPlayerId = PLAYERS_DISPLAYED_PAR_PAGE - 1
+    console.log(this.lastPlayerId)
   }
 
-  async retrievePlayer() {
+  onChangePage() {
+    const from = this.lastPlayerId + 1
+    const to = from + PLAYERS_DISPLAYED_PAR_PAGE
+    this.retrieveSpecificPlayers(from, to)
+  }
+
+  async retrieveSpecificPlayers(from: number, to: number): Promise<void> {
     try {
       this.loading = true
       let {
         data: players,
         error,
         status
-      } = await this.supabaseService.retrievePlayers()
+      } = await this.supabaseService.retrieveSpecificPlayers(from, to)
       this.loading = false
 
       if (error && status !== 406) {
@@ -31,7 +42,8 @@ export class PlayerListComponent implements OnInit {
       }
 
       if (players) {
-        this.players = players
+        this.players = [...this.players, ...players]
+        return
       }
     } catch (error) {
       if (error instanceof Error) {

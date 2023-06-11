@@ -51,8 +51,13 @@ export class SupabaseService {
     return this.supabase.auth.onAuthStateChange(callback)
   }
 
-  async retrievePlayers() {
-    const result = await this.supabase.from('players').select('*')
+  // from以上to未満のデータを取得
+  async retrieveSpecificPlayers(from: number = 1, to: number = 10) {
+    const result = await this.supabase
+      .from('players')
+      .select('*')
+      .gte('id', from)
+      .lt('id', to)
     console.log(result)
     return result
   }
