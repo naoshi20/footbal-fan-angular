@@ -19,7 +19,6 @@ export interface Player {
   representative_flag: boolean
   birthday: string | null
   img: string | null
-  mai_team: boolean
 }
 export interface PlayerId {
   id: number
