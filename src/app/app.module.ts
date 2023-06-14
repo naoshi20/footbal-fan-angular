@@ -9,14 +9,16 @@ import { PlayerDetailComponent } from './player-detail/player-detail.component'
 import { PlayerDetailService } from './service/player-detail.service'
 
 import { PlayerListComponent } from './player-list/player-list.component'
-import { HeaderButtonComponent } from './header-button/header-button.component'
+import { HeaderButtonComponent } from './header-button/header-button.component';
+import { StarButtonComponent } from './star-button/star-button.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayerDetailComponent,
     HeaderButtonComponent,
-    PlayerListComponent
+    PlayerListComponent,
+    StarButtonComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [PlayerDetailService],

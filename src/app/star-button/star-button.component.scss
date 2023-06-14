@@ -1,0 +1,15 @@
+@import 'src/assets/styles/reset.scss';
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+.fa-star {
+  color: orange;
+}
+
+.star {
+  font-size: 2.3rem;
+  cursor: pointer;
+}

@@ -29,61 +29,29 @@ export class PlayerListComponent implements OnInit {
   constructor(private readonly supabaseService: SupabaseService) {} //private playerService: PlayerService
 
   async ngOnInit(): Promise<void> {
-    await this.retrieveSpecificPlayersByTeamName(MAI_TEAM)
-    await this.retrieveSpecificPlayersById(0, 0 + PLAYERS_DISPLAYED_PAR_PAGE)
+    await this.retrievePlayersFromSpecificId(MAI_TEAM) //retrievePlayersFromSpecificId
+    // await this.retrieveSpecificPlayersById(0, 0 + PLAYERS_DISPLAYED_PAR_PAGE) // 0番目からX個取得するretrievePlayersFromSpecificId
     console.log(this.lastPlayerId)
   }
 
-  public async onChangePage() {
-    const from = this.lastPlayerId + 1
-    const to = from + PLAYERS_DISPLAYED_PAR_PAGE
-    await this.retrieveSpecificPlayersById(from, to)
-    this.lastPlayerId = to
-  }
+  // public async onChangePage() {
+  //   const from = this.lastPlayerId + 1
+  //   const to = from + PLAYERS_DISPLAYED_PAR_PAGE
+  //   await this.retrieveSpecificPlayersById(from, to)
+  //   this.lastPlayerId = to
+  // }
 
   public async onChangePageMaiTeam() {
+    console.log(this.mayTeamLastPlayerId)
     const from = this.mayTeamLastPlayerId + 1
     console.log(from)
-    const to = from + PLAYERS_DISPLAYED_PAR_PAGE
-    await this.retrieveSpecificPlayersByTeamName(MAI_TEAM, from, to)
-    this.mayTeamLastPlayerId = to
+    await this.retrievePlayersFromSpecificId(MAI_TEAM, from)
   }
 
-  async retrieveSpecificPlayersById(from: number, to: number) {
-    try {
-      this.loading = true
-
-      let {
-        data: players,
-        error,
-        status
-      } = await this.supabaseService.retrieveSpecificPlayers(from, to)
-
-      this.loading = false
-
-      if (error && status !== 406) {
-        throw error
-      }
-
-      if (players) {
-        this.players = [...this.players, ...players]
-        this.lastPlayerId = this.players.slice(-1)[0].id
-        return
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(error.message)
-      }
-    } finally {
-      this.loading = false
-    }
-  }
-
-  async retrieveSpecificPlayersByTeamName(
+  async retrievePlayersFromSpecificId(
     team: string[],
-    from?: number,
-    to?: number
-  ) {
+    from?: number
+  ): Promise<void> {
     try {
       this.mayTeamPlayersLoading = true
 
@@ -91,11 +59,7 @@ export class PlayerListComponent implements OnInit {
         data: players,
         error,
         status
-      } = await this.supabaseService.retrieveSpecificPlayersByTeamName(
-        team,
-        from,
-        to
-      )
+      } = await this.supabaseService.retrievePlayersFromSpecificId(team, from)
 
       this.mayTeamPlayersLoading = false
 
@@ -107,7 +71,6 @@ export class PlayerListComponent implements OnInit {
         // players.mai_team
         this.mayTeamPlayers = [...this.mayTeamPlayers, ...players]
         this.mayTeamLastPlayerId = this.mayTeamPlayers.slice(-1)[0].id
-        console.log(this.mayTeamLastPlayerId)
         return
       }
     } catch (error) {
@@ -124,8 +87,6 @@ export class PlayerListComponent implements OnInit {
   }
 
   toggleMaiTeam() {
-    console.log(this.displayMaiTeam)
     this.displayMaiTeam = this.displayMaiTeam ? false : true
-    console.log(this.displayMaiTeam)
   }
 }

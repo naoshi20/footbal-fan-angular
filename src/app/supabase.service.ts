@@ -51,40 +51,42 @@ export class SupabaseService {
     return this.supabase.auth.onAuthStateChange(callback)
   }
 
-  // from以上to未満のデータを取得
-  async retrieveSpecificPlayers(from: number, to: number) {
-    const result = await this.supabase
-      .from('players5')
-      .select('*')
-      .gte('id', from)
-      .lt('id', to)
-    console.log(result)
-    return result
-  }
-
-  // from以上to未満のデータを取得
-  async retrieveSpecificPlayersByTeamName(
-    team: string[],
-    from?: number,
-    to?: number
-  ) {
-    if (from && to) {
+  // retrievePlayersFromSpecificId
+  async retrievePlayersFromSpecificId(team: string[], from?: number) {
+    if (from) {
       const result = await this.supabase
         .from('players5')
         .select('*')
         .in('belongings', team)
         .gte('id', from)
+        .order('id', { ascending: true })
         .limit(PLAYERS_DISPLAYED_PAR_PAGE)
-      console.log(result)
       return result
     } else {
       const result = await this.supabase
         .from('players5')
         .select('*')
         .in('belongings', team)
+        .order('id', { ascending: true })
         .limit(PLAYERS_DISPLAYED_PAR_PAGE)
-      console.log(result)
       return result
     }
+  }
+
+  // async fetchPlayerFavoriteStatus(playerId: number) {
+  //   const result = await this.supabase
+  //     .from('players5')
+  //     .select('favorite')
+  //     .eq('id', playerId)
+  //   return result
+  // }
+
+  async updatePlayerFavoriteStatus(playerId: number, favorite: boolean) {
+    const result = await this.supabase
+      .from('players5')
+      .update({ favorite: favorite })
+      .eq('id', playerId)
+      .select()
+    return result
   }
 }

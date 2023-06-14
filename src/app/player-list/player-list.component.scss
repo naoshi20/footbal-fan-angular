@@ -1,3 +1,14 @@
+.img-wrapper {
+  position: relative;
+}
+
+.star-button {
+  position: absolute;
+  right: 0.7rem;
+  top: 0.7rem;
+  z-index: 10;
+}
+
 .card {
   margin-top: 25px;
 }
