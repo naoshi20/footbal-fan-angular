@@ -1,4 +1,6 @@
 <button (click)="registerPlayerAsFavorite()">
-  <i *ngIf="activated" class="fa fa-star star"></i>
+  <!-- デフォルト -->
   <i *ngIf="!activated" class="fa fa-star-o star"></i>
+  <!-- 押下された後 -->
+  <i *ngIf="activated" class="fa fa-star star"></i>
 </button>

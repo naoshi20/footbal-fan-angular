@@ -9,22 +9,21 @@ import { SupabaseService } from '../supabase.service'
 export class StarButtonComponent implements OnInit {
   @Input() playerId: string = ''
   @Input('favorite') favorite: string = ''
-  activated: boolean
+  activated: boolean = false
 
-  constructor(private readonly supabaseService: SupabaseService) {
-    this.activated = Boolean(this.favorite)
-    console.log(this.activated)
-  }
+  constructor(private readonly supabaseService: SupabaseService) {}
 
   ngOnInit(): void {
-    //this.supabaseService.fetchPlayerFavoriteStatus(Number(this.playerId))
+    this.activated = this.favorite === 'true'
+    console.log('text', this.favorite)
+    console.log('boolean', this.activated)
   }
 
   public async registerPlayerAsFavorite(): Promise<void> {
-    console.log(Number(this.playerId))
-    await this.supabaseService.updatePlayerFavoriteStatus(
+    this.activated = !this.activated
+    const result = await this.supabaseService.updatePlayerFavoriteStatus(
       Number(this.playerId),
-      !Boolean(this.activated)
+      this.activated
     )
     return
   }

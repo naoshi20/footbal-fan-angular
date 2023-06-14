@@ -51,7 +51,6 @@ export class SupabaseService {
     return this.supabase.auth.onAuthStateChange(callback)
   }
 
-  // retrievePlayersFromSpecificId
   async retrievePlayersFromSpecificId(team?: string[], from?: number) {
     // 全チーム表示の場合
     if (!team && !from) {
@@ -94,14 +93,6 @@ export class SupabaseService {
     }
     throw Error
   }
-
-  // async fetchPlayerFavoriteStatus(playerId: number) {
-  //   const result = await this.supabase
-  //     .from('players5')
-  //     .select('favorite')
-  //     .eq('id', playerId)
-  //   return result
-  // }
 
   async updatePlayerFavoriteStatus(playerId: number, favorite: boolean) {
     const result = await this.supabase
