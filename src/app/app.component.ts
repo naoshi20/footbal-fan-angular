@@ -14,10 +14,10 @@ export class AppComponent {
   session = this.supabase.session
 
   pageLinks: Map<string, string> = new Map([
-    ['/', 'ホーム'],
-    ['/players', '選手一覧'],
-    ['/player', '選手'],
-    ['/button', 'ボタン']
+    ['/', 'お気に入り'],
+    ['/players', '選手一覧']
+    // ['/player', '選手'],
+    // ['/button', 'ボタン']
   ])
 
   currentPath = ''

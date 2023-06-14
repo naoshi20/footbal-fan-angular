@@ -13,7 +13,8 @@
         <ng-container *ngFor="let player of mayTeamPlayers; index as i; trackBy: trackByFn">
           <!-- <ng-container *ngIf="player.mai_team"> -->
           <div class="col-md-3 col-sm-4 col-6">
-            <a [routerLink]="[ player.id ]">
+            <!-- <a [routerLink]="[ player.id ]"> -->
+            <a>
               <div class="card">
                 <div class="img-wrapper">
                   <app-star-button playerId="{{ player.id }}" favorite="{{ player.favorite }}"
@@ -36,8 +37,11 @@
       <ng-container *ngIf="!displayMaiTeam">
         <ng-container *ngFor="let player of players; index as i; trackBy: trackByFn">
           <div class="col-md-3 col-sm-4 col-6">
-            <a [routerLink]="[ player.id ]">
+            <!-- <a [routerLink]="[ player.id ]"> -->
+            <a>
               <div class="card">
+                <app-star-button playerId="{{ player.id }}" favorite="{{ player.favorite }}"
+                  class="star-button"></app-star-button>
                 <img class="card-img-top" src="{{ player.img }}" alt="Card image cap">
                 <div class="card-body">
                   <p class="card-text">{{ player.belongings }}</p>

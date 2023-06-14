@@ -102,4 +102,25 @@ export class SupabaseService {
       .select()
     return result
   }
+
+  async retrieveFavoritePlayersFromSpecificId(from?: number) {
+    if (!from) {
+      const result = await this.supabase
+        .from('players5')
+        .select('*')
+        .eq('favorite', true)
+        .order('id', { ascending: true })
+        .limit(PLAYERS_DISPLAYED_PAR_PAGE)
+      return result
+    } else {
+      const result = await this.supabase
+        .from('players5')
+        .select('*')
+        .eq('favorite', true)
+        .gte('id', from)
+        .order('id', { ascending: true })
+        .limit(PLAYERS_DISPLAYED_PAR_PAGE)
+      return result
+    }
+  }
 }

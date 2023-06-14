@@ -1,6 +1,5 @@
 <h1>{{title}}</h1>
 <header style="background-color: white;">
-  <h2>ヘッダー</h2>
   <ng-container *ngFor="let pageLink of pageLinks | keyvalue; let i = index">
     <app-header-button [title]="pageLink.value" [link]="pageLink.key" [buttonType]="styleButton(i)" [bgColor]="'white'"
       [isDisabled]="pageLink.key == currentPath">
@@ -9,6 +8,5 @@
 </header>
 
 <body>
-  <h2>ボディ</h2>
   <router-outlet></router-outlet>
 </body>
