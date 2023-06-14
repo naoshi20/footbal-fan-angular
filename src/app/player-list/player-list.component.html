@@ -33,7 +33,7 @@
       <button *ngIf="displayMaiTeam" (click)="onChangePageMaiTeam()">次の10人</button>
 
       <!-- 全表示の時 -->
-      <!-- <ng-container *ngIf="!displayMaiTeam">
+      <ng-container *ngIf="!displayMaiTeam">
         <ng-container *ngFor="let player of players; index as i; trackBy: trackByFn">
           <div class="col-md-3 col-sm-4 col-6">
             <a [routerLink]="[ player.id ]">
@@ -48,7 +48,7 @@
           </div>
         </ng-container>
       </ng-container>
-      <button *ngIf="!displayMaiTeam" (click)="onChangePage()">次の10人</button> -->
+      <button *ngIf="!displayMaiTeam" (click)="onChangePage()">次の10人</button>
 
     </div>
   </div>

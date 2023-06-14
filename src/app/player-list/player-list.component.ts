@@ -26,32 +26,25 @@ export class PlayerListComponent implements OnInit {
 
   displayMaiTeam: boolean = true
 
-  constructor(private readonly supabaseService: SupabaseService) {} //private playerService: PlayerService
+  constructor(private readonly supabaseService: SupabaseService) {}
 
   async ngOnInit(): Promise<void> {
-    await this.retrievePlayersFromSpecificId(MAI_TEAM) //retrievePlayersFromSpecificId
-    // await this.retrieveSpecificPlayersById(0, 0 + PLAYERS_DISPLAYED_PAR_PAGE) // 0番目からX個取得するretrievePlayersFromSpecificId
+    await this.retrieveMaiTeamPlayers(MAI_TEAM)
+    await this.retrieveAllPlayers()
     console.log(this.lastPlayerId)
   }
 
-  // public async onChangePage() {
-  //   const from = this.lastPlayerId + 1
-  //   const to = from + PLAYERS_DISPLAYED_PAR_PAGE
-  //   await this.retrieveSpecificPlayersById(from, to)
-  //   this.lastPlayerId = to
-  // }
-
-  public async onChangePageMaiTeam() {
-    console.log(this.mayTeamLastPlayerId)
-    const from = this.mayTeamLastPlayerId + 1
-    console.log(from)
-    await this.retrievePlayersFromSpecificId(MAI_TEAM, from)
+  public async onChangePage() {
+    const from = this.lastPlayerId + 1
+    await this.retrieveAllPlayers(from)
   }
 
-  async retrievePlayersFromSpecificId(
-    team: string[],
-    from?: number
-  ): Promise<void> {
+  public async onChangePageMaiTeam() {
+    const from = this.mayTeamLastPlayerId + 1
+    await this.retrieveMaiTeamPlayers(MAI_TEAM, from)
+  }
+
+  async retrieveMaiTeamPlayers(team?: string[], from?: number): Promise<void> {
     try {
       this.mayTeamPlayersLoading = true
 
@@ -79,6 +72,40 @@ export class PlayerListComponent implements OnInit {
       }
     } finally {
       this.mayTeamPlayersLoading = false
+    }
+  }
+
+  async retrieveAllPlayers(from?: number): Promise<void> {
+    try {
+      this.loading = true
+
+      let {
+        data: players,
+        error,
+        status
+      } = await this.supabaseService.retrievePlayersFromSpecificId(
+        undefined, // teamは指定しない
+        from
+      )
+
+      this.loading = false
+
+      if (error && status !== 406) {
+        throw error
+      }
+
+      if (players) {
+        // players.mai_team
+        this.players = [...this.players, ...players]
+        this.lastPlayerId = this.players.slice(-1)[0].id
+        return
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message)
+      }
+    } finally {
+      this.loading = false
     }
   }
 

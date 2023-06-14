@@ -52,17 +52,28 @@ export class SupabaseService {
   }
 
   // retrievePlayersFromSpecificId
-  async retrievePlayersFromSpecificId(team: string[], from?: number) {
-    if (from) {
+  async retrievePlayersFromSpecificId(team?: string[], from?: number) {
+    // 全チーム表示の場合
+    if (!team && !from) {
       const result = await this.supabase
         .from('players5')
         .select('*')
-        .in('belongings', team)
+        .order('id', { ascending: true })
+        .limit(PLAYERS_DISPLAYED_PAR_PAGE)
+      return result
+    }
+    if (!team && from) {
+      const result = await this.supabase
+        .from('players5')
+        .select('*')
         .gte('id', from)
         .order('id', { ascending: true })
         .limit(PLAYERS_DISPLAYED_PAR_PAGE)
       return result
-    } else {
+    }
+
+    // 好きなチーム表示の場合
+    if (team && !from) {
       const result = await this.supabase
         .from('players5')
         .select('*')
@@ -71,6 +82,17 @@ export class SupabaseService {
         .limit(PLAYERS_DISPLAYED_PAR_PAGE)
       return result
     }
+    if (team && from) {
+      const result = await this.supabase
+        .from('players5')
+        .select('*')
+        .in('belongings', team)
+        .gte('id', from)
+        .order('id', { ascending: true })
+        .limit(PLAYERS_DISPLAYED_PAR_PAGE)
+      return result
+    }
+    throw Error
   }
 
   // async fetchPlayerFavoriteStatus(playerId: number) {
