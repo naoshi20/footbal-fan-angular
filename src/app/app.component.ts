@@ -15,9 +15,8 @@ export class AppComponent {
 
   pageLinks: Map<string, string> = new Map([
     ['/', 'お気に入り'],
-    ['/players', '選手一覧']
-    // ['/player', '選手'],
-    // ['/button', 'ボタン']
+    ['/players', '選手一覧'],
+    ['/all-players', '全選手']
   ])
 
   currentPath = ''
@@ -38,16 +37,8 @@ export class AppComponent {
 
   public styleButton(index: number): string {
     const remainder = index % 3
-    let buttonType
-    if (remainder === 0) {
-      buttonType = 'primary'
-    } else if (remainder === 1) {
-      buttonType = 'secondary'
-    } else if (remainder === 2) {
-      buttonType = 'ghost'
-    } else {
-      throw new Error('')
-    }
+    /// remainderを使ってボタンのスタイルを変えることも可能
+    let buttonType = 'secondary'
     return buttonType
   }
 }

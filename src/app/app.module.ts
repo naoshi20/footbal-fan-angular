@@ -9,9 +9,10 @@ import { PlayerDetailComponent } from './player-detail/player-detail.component'
 import { PlayerDetailService } from './service/player-detail.service'
 
 import { PlayerListComponent } from './player-list/player-list.component'
-import { HeaderButtonComponent } from './header-button/header-button.component';
-import { StarButtonComponent } from './star-button/star-button.component';
+import { HeaderButtonComponent } from './header-button/header-button.component'
+import { StarButtonComponent } from './star-button/star-button.component'
 import { FavoritePlayerListComponent } from './favorite-player-list/favorite-player-list.component'
+import { AllPlayerListComponent } from './all-player-list/all-player-list.component'
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FavoritePlayerListComponent } from './favorite-player-list/favorite-pla
     PlayerDetailComponent,
     HeaderButtonComponent,
     PlayerListComponent,
+    AllPlayerListComponent,
     StarButtonComponent,
     FavoritePlayerListComponent
   ],

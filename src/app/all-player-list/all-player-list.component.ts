@@ -2,19 +2,13 @@ import { Component, OnInit } from '@angular/core'
 import { Player, SupabaseService } from '../supabase.service'
 
 export const PLAYERS_DISPLAYED_PAR_PAGE: number = 10
-const MAI_TEAM: string[] = [
-  'ブレントフォード',
-  'ボーンマス',
-  'ウエストハム',
-  'リヴァプール'
-]
 
 @Component({
-  selector: 'app-player-list',
-  templateUrl: './player-list.component.html',
-  styleUrls: ['./player-list.component.scss']
+  selector: 'app-all-player-list',
+  templateUrl: './all-player-list.component.html',
+  styleUrls: ['./all-player-list.component.scss']
 })
-export class PlayerListComponent implements OnInit {
+export class AllPlayerListComponent implements OnInit {
   players: any = []
   loading = false
   lastPlayerId: number = 0
@@ -22,15 +16,16 @@ export class PlayerListComponent implements OnInit {
   constructor(private readonly supabaseService: SupabaseService) {}
 
   async ngOnInit(): Promise<void> {
-    await this.retrieveMaiTeamPlayers(MAI_TEAM)
+    await this.retrieveAllPlayers()
+    console.log(this.lastPlayerId)
   }
 
-  public async onChangePageMaiTeam() {
+  public async onChangePage() {
     const from = this.lastPlayerId + 1
-    await this.retrieveMaiTeamPlayers(MAI_TEAM, from)
+    await this.retrieveAllPlayers(from)
   }
 
-  async retrieveMaiTeamPlayers(team?: string[], from?: number): Promise<void> {
+  async retrieveAllPlayers(from?: number): Promise<void> {
     try {
       this.loading = true
 
@@ -38,7 +33,10 @@ export class PlayerListComponent implements OnInit {
         data: players,
         error,
         status
-      } = await this.supabaseService.retrievePlayersFromSpecificId(team, from)
+      } = await this.supabaseService.retrievePlayersFromSpecificId(
+        undefined, // teamは指定しない
+        from
+      )
 
       this.loading = false
 
