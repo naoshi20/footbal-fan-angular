@@ -5,7 +5,7 @@ export const PLAYERS_DISPLAYED_PAR_PAGE: number = 10
 const MAI_TEAM: string[] = [
   'ブレントフォード',
   'ボーンマス',
-  'ウェストハム',
+  'ウエストハム',
   'リヴァプール'
 ]
 
