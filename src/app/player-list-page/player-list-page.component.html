@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div>
+        <ng-container *ngFor="let team of teams; index as i;">
+          <app-toggle-button (toggleEvent)="toggle(team)" [teamName]="team"></app-toggle-button>
+        </ng-container>
+      </div>
+      <!-- マイチームのみ表示の時 -->
+      <app-player-list teams="teams"></app-player-list>
+    </div>
+  </div>

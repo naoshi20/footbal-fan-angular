@@ -15,8 +15,6 @@ export class StarButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.activated = this.favorite === 'true'
-    console.log('text', this.favorite)
-    console.log('boolean', this.activated)
   }
 
   public async registerPlayerAsFavorite(): Promise<void> {

@@ -17,7 +17,6 @@ export class AllPlayerListComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.retrieveAllPlayers()
-    console.log(this.lastPlayerId)
   }
 
   public async onChangePage() {

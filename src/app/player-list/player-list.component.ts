@@ -2,12 +2,6 @@ import { Component, OnInit } from '@angular/core'
 import { Player, SupabaseService } from '../supabase.service'
 
 export const PLAYERS_DISPLAYED_PAR_PAGE: number = 10
-const MAI_TEAM: string[] = [
-  'ブレントフォード',
-  'ボーンマス',
-  'ウエストハム',
-  'リヴァプール'
-]
 
 @Component({
   selector: 'app-player-list',
@@ -22,15 +16,18 @@ export class PlayerListComponent implements OnInit {
   constructor(private readonly supabaseService: SupabaseService) {}
 
   async ngOnInit(): Promise<void> {
-    await this.retrieveMaiTeamPlayers(MAI_TEAM)
+    await this.retrieveSpecificTeamPlayers(undefined)
   }
 
-  public async onChangePageMaiTeam() {
+  public async onChangePage() {
     const from = this.lastPlayerId + 1
-    await this.retrieveMaiTeamPlayers(MAI_TEAM, from)
+    await this.retrieveSpecificTeamPlayers(undefined, from)
   }
 
-  async retrieveMaiTeamPlayers(team?: string[], from?: number): Promise<void> {
+  async retrieveSpecificTeamPlayers(
+    team?: string[], // teamがundefinedの場合は全チーム
+    from?: number
+  ): Promise<void> {
     try {
       this.loading = true
 
@@ -47,7 +44,6 @@ export class PlayerListComponent implements OnInit {
       }
 
       if (players) {
-        // players.mai_team
         this.players = [...this.players, ...players]
         this.lastPlayerId = this.players.slice(-1)[0].id
         return
