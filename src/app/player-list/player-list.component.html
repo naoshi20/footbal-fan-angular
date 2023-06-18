@@ -2,25 +2,27 @@
   <div class="container">
     <div class="row">
       <!-- マイチームのみ表示の時 -->
-
-      <ng-container *ngFor="let player of players; index as i; trackBy: trackByFn">
-        <div class="col-md-3 col-sm-4 col-6">
-          <!-- <a [routerLink]="[ player.id ]"> -->
-          <a>
-            <div class="card">
-              <div class="img-wrapper">
-                <app-star-button playerId="{{ player.id }}" favorite="{{ player.favorite }}"
-                  class="star-button"></app-star-button>
-                <img class="card-img-top" src="{{ player.img }}" alt="Card image cap">
+      <ng-container *ngIf="players.length > 0">
+        <ng-container *ngFor="let player of players; index as i; trackBy: trackByFn">
+          <div class="col-md-3 col-sm-4 col-6">
+            <!-- <a [routerLink]="[ player.id ]"> -->
+            <a>
+              <div class="card">
+                <div class="img-wrapper">
+                  <app-star-button playerId="{{ player.id }}" favorite="{{ player.favorite }}"
+                    class="star-button"></app-star-button>
+                  <img class="card-img-top" src="{{ player.img }}" alt="Card image cap">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">{{ player.belongings }}</p>
+                  <h5 class="card-text">{{ player.japanese_name }}</h5>
+                </div>
               </div>
-              <div class="card-body">
-                <p class="card-text">{{ player.belongings }}</p>
-                <h5 class="card-text">{{ player.japanese_name }}</h5>
-              </div>
-            </div>
-          </a>
-        </div>
+            </a>
+          </div>
+        </ng-container>
       </ng-container>
+      <p *ngIf="players.length === 0">表示する選手がいません</p>
 
     </div>
   </div>
