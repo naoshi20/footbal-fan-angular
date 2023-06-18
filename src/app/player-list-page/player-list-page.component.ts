@@ -41,12 +41,15 @@ export class PlayerListPageComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.addAllCheckMarks()
-    await this.retrieveSpecificTeamPlayers(undefined)
+
+    const team_list = this.convertTeamObjectToList()
+    await this.retrieveSpecificTeamPlayers(team_list)
   }
 
   public async onChangePage() {
     const from = this.lastPlayerId + 1
-    await this.retrieveSpecificTeamPlayers(undefined, from)
+    const team_list = this.convertTeamObjectToList()
+    await this.retrieveSpecificTeamPlayers(team_list, from)
   }
 
   async retrieveSpecificTeamPlayers(
@@ -71,6 +74,7 @@ export class PlayerListPageComponent implements OnInit {
       if (players) {
         this.players = [...this.players, ...players]
         this.lastPlayerId = this.players.slice(-1)[0].id
+        console.log(players)
         return
       }
     } catch (error) {
@@ -83,10 +87,9 @@ export class PlayerListPageComponent implements OnInit {
   }
 
   async toggle(teamName: string) {
-    console.log('toggle')
     this.teamsDisplayed[teamName] = !this.teamsDisplayed[teamName]
-    console.log(this.teamsDisplayed)
 
+    this.players = []
     const team_list = this.convertTeamObjectToList()
     await this.retrieveSpecificTeamPlayers(team_list)
   }
@@ -108,7 +111,7 @@ export class PlayerListPageComponent implements OnInit {
 
   convertTeamObjectToList() {
     // playersを初期化して再度APIを呼び直す
-    this.players = []
+
     let team_list = []
     for (const [key, value] of Object.entries(this.teamsDisplayed)) {
       if (value === false) {
