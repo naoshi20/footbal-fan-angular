@@ -6,7 +6,9 @@
           <app-toggle-button (toggleEvent)="toggle(team)" [teamName]="team"></app-toggle-button>
         </ng-container>
       </div>
-      <!-- マイチームのみ表示の時 -->
-      <app-player-list teams="teams"></app-player-list>
+
+      <app-player-list teams="teams" [players]="players"></app-player-list>
+
+      <button (click)="onChangePage()">次の10人</button>
     </div>
   </div>

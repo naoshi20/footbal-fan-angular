@@ -40,6 +40,7 @@ export class ToggleButtonComponent implements OnInit {
   }
 
   toggle() {
+    console.log('emit')
     this.toggleEvent.emit()
   }
 }

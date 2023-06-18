@@ -14,6 +14,7 @@ import { FavoritePlayerListComponent } from './favorite-player-list/favorite-pla
 import { PlayerListComponent } from './player-list/player-list.component'
 import { PlayerListPageComponent } from './player-list-page/player-list-page.component'
 import { ToggleButtonComponent } from './toggle-button/toggle-button.component'
+import { ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -26,7 +27,12 @@ import { ToggleButtonComponent } from './toggle-button/toggle-button.component'
     FavoritePlayerListComponent,
     ToggleButtonComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
+  ],
   providers: [PlayerDetailService],
   bootstrap: [AppComponent]
 })

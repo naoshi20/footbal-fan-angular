@@ -33,9 +33,7 @@ export class PlayerListPageComponent implements OnInit {
   players: any = []
   loading = false
   lastPlayerId: number = 0
-  // boolean[] = Array(Object.keys(ALL_TEAM).length).fill(true) // Map<string,number> = new Map().set('key1', true)
   teamsDisplayed: { [key: string]: boolean } = {}
-
   //  ['アーセナル', 'アストンヴィラ', ...]
   teams: string[] = Object.values(ALL_TEAM)
 
@@ -45,10 +43,62 @@ export class PlayerListPageComponent implements OnInit {
     for (let team of this.teams) {
       this.teamsDisplayed[team] = true
     }
+    await this.retrieveSpecificTeamPlayers(undefined)
   }
 
-  toggle(teamName: string) {
+  public async onChangePage() {
+    const from = this.lastPlayerId + 1
+    await this.retrieveSpecificTeamPlayers(undefined, from)
+  }
+
+  async retrieveSpecificTeamPlayers(
+    team?: string[], // teamがundefinedの場合は全チーム
+    from?: number
+  ): Promise<void> {
+    try {
+      this.loading = true
+
+      let {
+        data: players,
+        error,
+        status
+      } = await this.supabaseService.retrievePlayersFromSpecificId(team, from)
+
+      this.loading = false
+
+      if (error && status !== 406) {
+        throw error
+      }
+
+      if (players) {
+        this.players = [...this.players, ...players]
+        this.lastPlayerId = this.players.slice(-1)[0].id
+        return
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message)
+      }
+    } finally {
+      this.loading = false
+    }
+  }
+
+  async toggle(teamName: string) {
+    console.log('toggle')
     this.teamsDisplayed[teamName] = !this.teamsDisplayed[teamName]
     console.log(this.teamsDisplayed)
+
+    // playersを初期化して再度APIを呼び直す
+    this.players = []
+    let team_list = []
+    for (const [key, value] of Object.entries(this.teamsDisplayed)) {
+      if (value === false) {
+        continue
+      }
+      team_list.push(key)
+    }
+
+    await this.retrieveSpecificTeamPlayers(team_list)
   }
 }
