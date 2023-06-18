@@ -30,6 +30,7 @@ export const ABBREVIATED_TEAM_NAME: { [key: string]: string } = {
 })
 export class ToggleButtonComponent implements OnInit {
   @Input() public teamName: string = ''
+  @Input() public checked: boolean = true
   @Output() toggleEvent: EventEmitter<any> = new EventEmitter()
   abbreviatedTeamName: string = ''
 

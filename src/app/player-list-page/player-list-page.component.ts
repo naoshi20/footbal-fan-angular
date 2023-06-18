@@ -40,9 +40,7 @@ export class PlayerListPageComponent implements OnInit {
   constructor(private readonly supabaseService: SupabaseService) {}
 
   async ngOnInit(): Promise<void> {
-    for (let team of this.teams) {
-      this.teamsDisplayed[team] = true
-    }
+    this.addAllCheckMarks()
     await this.retrieveSpecificTeamPlayers(undefined)
   }
 
@@ -89,6 +87,26 @@ export class PlayerListPageComponent implements OnInit {
     this.teamsDisplayed[teamName] = !this.teamsDisplayed[teamName]
     console.log(this.teamsDisplayed)
 
+    const team_list = this.convertTeamObjectToList()
+    await this.retrieveSpecificTeamPlayers(team_list)
+  }
+
+  clearAllCheckMarks() {
+    for (let team of this.teams) {
+      this.teamsDisplayed[team] = false
+    }
+    console.log('clear')
+  }
+
+  async addAllCheckMarks() {
+    for (let team of this.teams) {
+      this.teamsDisplayed[team] = true
+    }
+    const team_list = this.convertTeamObjectToList()
+    await this.retrieveSpecificTeamPlayers(team_list)
+  }
+
+  convertTeamObjectToList() {
     // playersを初期化して再度APIを呼び直す
     this.players = []
     let team_list = []
@@ -98,7 +116,6 @@ export class PlayerListPageComponent implements OnInit {
       }
       team_list.push(key)
     }
-
-    await this.retrieveSpecificTeamPlayers(team_list)
+    return team_list
   }
 }

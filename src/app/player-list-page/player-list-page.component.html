@@ -3,9 +3,13 @@
     <div class="row">
       <div>
         <ng-container *ngFor="let team of teams; index as i;">
-          <app-toggle-button (toggleEvent)="toggle(team)" [teamName]="team"></app-toggle-button>
+          <app-toggle-button (toggleEvent)="toggle(team)" [teamName]="team"
+            [checked]="teamsDisplayed[team]"></app-toggle-button>
         </ng-container>
       </div>
+
+      <button (click)="clearAllCheckMarks()">全てのチェックを外す</button>
+      <button (click)="addAllCheckMarks()">全てのチェックを付ける</button>
 
       <app-player-list teams="teams" [players]="players"></app-player-list>
 
