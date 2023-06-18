@@ -73,11 +73,7 @@ export class PlayerListPageComponent implements OnInit {
 
       if (players) {
         this.players = [...this.players, ...players]
-        console.log(this.players)
-        if (this.players.length === 0) {
-          return
-        }
-        const lastPlayer = this.players.slice(-1)[0].id
+        this.lastPlayerId = this.players.slice(-1)[0].id
         console.log(players)
         return
       }
