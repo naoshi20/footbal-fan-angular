@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Player, SupabaseService } from '../supabase.service'
 
-export const PLAYERS_DISPLAYED_PAR_PAGE: number = 10
+export const PLAYERS_DISPLAYED_PAR_PAGE: number = 20
 
 @Component({
   selector: 'app-player-list',
